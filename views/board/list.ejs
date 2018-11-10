@@ -52,7 +52,7 @@
         <%var obj=records[pm.curPos];//배열에 들어있는 json 추출%>
         <tr>
             <td><%=pm.num%></td>
-            <td><%=obj.title%></td>
+            <td><a href="/board/detail?board_id=<%=obj.board_id%>"><%=obj.title%></a></td>
             <td><%=obj.writer%></td>
             <td><%=obj.regdate%></td>
             <td><%=obj.hit%></td>

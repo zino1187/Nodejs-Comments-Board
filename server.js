@@ -130,6 +130,33 @@ app.post("/board/regist", function (request, response) {
 });
 
 
+//상세보기 요청 처리
+app.get("/board/detail", function(request, response){
+    //get 방식의 header를 타고 전송한 데이터는 
+    //request.query로 추출한다 ( 물론 json 형태이다)
+    var board_id=request.query.board_id;
+
+    pool.getConnection(function(error, con){
+        if(error){
+            console.log(error);
+        }else{
+            var sql="select * from board where board_id=?";                
+            con.query(sql, [board_id] , function(err,result,fields){
+                if(err){
+                  console.log(err);      
+                }else{
+                    //결과 페이지로 result 를 전달!!
+                    response.render("board/detail", {
+                        record:result[0]
+                    });                        
+                }
+                pool.releaseConnection(function(e){});
+            });
+        }
+    });    
+});
+
+
 //서버객체로 서버 가동!!
 server.listen(9999, function () {
     console.log("웹서버가 9999포트에서 가동중...");
