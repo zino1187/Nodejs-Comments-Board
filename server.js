@@ -51,6 +51,10 @@ app.post("/board/regist", function(request, response){
     //express 모듈에는 파라미터를 json 형식으로 받을
     //수 있게 해주는 미들웨어가 지원된다..
     console.log(request.body);
+    var writer=request.body.writer;
+    var title=request.body.title;
+    var content=request.body.content;
+    console.log(writer, title, content);
 
     //console.log는 서버측에 출력됨...
     console.log("글 등록 원해?");
@@ -63,7 +67,27 @@ app.post("/board/regist", function(request, response){
             //쿼리문 수행!!
             var sql="insert into board(writer,title,content)";
             sql+=" values(?,?,?)"
-            //con.query(sql);
+            con.query(sql,[writer, title, content], function(err, result){
+                if(err){
+                    console.log(err);
+                }else{
+                    console.log(result);    
+                    if(result.affectedRows ==0){
+                        response.writeHead(500, {"Content-Type":"text/html;charset=utf-8"});
+                        response.end("등록실패");                            
+                    }else{
+                        //response.writeHead(200, {"Content-Type":"text/html;charset=utf-8"});
+                        //response.end("등록성공"); 
+                        //클라이언트의 브라우저가 지정한 url 로
+                        //다시 접근하게 한다!!
+                        response.redirect("/board/list");//다시 접속해!!!
+                                                   
+                    } 
+                    //커넥션풀로 다시 돌려보내기!! ( 반납)                   
+                    pool.releaseConnection(function(e){});
+                }                
+
+            });
         }
     });
 
