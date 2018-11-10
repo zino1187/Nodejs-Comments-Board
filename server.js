@@ -74,6 +74,7 @@ app.get("/board/list", function (request, response) {
                         pm:pm
                     });
                 }
+                pool.releaseConnection(function (e) { });
             });
         }
     });

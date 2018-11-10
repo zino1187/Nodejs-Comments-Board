@@ -48,14 +48,17 @@
             <th>조회수</th>
         </tr>
         <%for(var i=0;i<pm.pageSize;i++){%>
-        <%var obj=records[i];//배열에 들어있는 json 추출%>
+        <%if(pm.num<1)break;%>            
+        <%var obj=records[pm.curPos];//배열에 들어있는 json 추출%>
         <tr>
-            <td>26</td>
+            <td><%=pm.num%></td>
             <td><%=obj.title%></td>
             <td><%=obj.writer%></td>
             <td><%=obj.regdate%></td>
             <td><%=obj.hit%></td>
         </tr>
+        <%pm.num--;%>
+		<%pm.curPos++;%>        
         <%}%>
         <tr>
             <td colspan="5" align="center">
