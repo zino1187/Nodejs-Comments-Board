@@ -3,6 +3,7 @@ var http = require("http"); //기본 서버 모듈
 var express = require("express");//서버 보완모듈
 var mysql = require("mysql");
 var bodyParser = require("body-parser");//외부모듈
+var conString=require("./mymodule/conString.js");
 var app = express();//express 객체 생성!!
 //서버객체 생성 
 var server = http.createServer(app);
@@ -28,12 +29,7 @@ app.set("view engine", "ejs");//확장자 등록
 //커넥션풀링이란? 접속자가 없더라도 db와 미리 연결
 //된 객체를 확보하여 메모리에 모아놓는 처리방법
 //왜 사용하나? 대량의 사용자 처리를 위함..
-var pool = mysql.createPool({
-    url: "localhost",
-    user: "root",
-    password: "",
-    database: "front"
-});
+var pool = mysql.createPool(conString);
 
 //요청처리!!
 //클라이언트가 요청한 uri 매핑!!

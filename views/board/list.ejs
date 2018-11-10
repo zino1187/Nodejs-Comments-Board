@@ -1,3 +1,12 @@
+<%
+    /*(paging)페이징 처리 관련 변수 
+    페이징 처리란? 여러건의 데이터를 분할 하는방법
+    산수 로직에 의존한다!!
+    */
+
+    var totalRecord=103;//총 레코드 수    
+
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,14 +49,14 @@
             <th>등록일</th>
             <th>조회수</th>
         </tr>
-        <%for(var i=0;i<records.length;i++){%>
-        <%var obj=records[i];//배열에 들어있는 json 추출%>
+        <%for(var i=0;i<totalRecord;i++){%>
+        <%//var obj=records[i];//배열에 들어있는 json 추출%>
         <tr>
             <td>26</td>
-            <td><%=obj.title%></td>
-            <td><%=obj.writer%></td>
-            <td><%=obj.regdate%></td>
-            <td><%=obj.hit%></td>
+            <td><%//=obj.title%></td>
+            <td><%//=obj.writer%></td>
+            <td><%//=obj.regdate%></td>
+            <td><%//=obj.hit%></td>
         </tr>
         <%}%>
         <tr>
