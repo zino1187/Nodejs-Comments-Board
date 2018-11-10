@@ -11,6 +11,8 @@
     var pageSize=10; //한페이지당 보여질 레코드 수
     var totalPage=Math.ceil(totalRecord/pageSize);//총 페이지 수
     var blockSize=10;//블럭당 보여질 페이지 수!!
+    var firstPage=currentPage - (currentPage-1)%blockSize;//블럭당 시작 페이지
+    var lastPage=firstPage+(blockSize-1);//블럭당 마지막 페이지
 %>
 <%="현재 페이지는 "+currentPage%>
 <!DOCTYPE html>
@@ -74,11 +76,11 @@
         <%}%>
         <tr>
             <td colspan="5" align="center">
-                ◀
-                <%for(var i=1;i<=blockSize;i++){%>
+                <a href="/board/list?currentPage=<%=firstPage-1%>">◀</a>
+                <%for(var i=firstPage;i<=lastPage;i++){%>
                 <a  <%if(i==currentPage){%>class="pageStyle"<%}%>  href="/board/list?currentPage=<%=i%>">[<%=i%>]</a>
                 <%}%>
-                ▶
+                <a href="/board/list?currentPage=<%=lastPage+1%>">▶</a>
             </td>
         </tr>        
         <tr>
