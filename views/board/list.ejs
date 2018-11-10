@@ -64,6 +64,7 @@
             <td colspan="5" align="center">
                 <a href="/board/list?currentPage=<%=pm.firstPage-1%>">◀</a>
                 <%for(var i=pm.firstPage;i<=pm.lastPage;i++){%>
+                <%if(i>pm.totalPage)break;//총페이지를넘어셔면 멈춤%>                        
                 <a  <%if(i==pm.currentPage){%>class="pageStyle"<%}%>  href="/board/list?currentPage=<%=i%>">[<%=i%>]</a>
                 <%}%>
                 <a href="/board/list?currentPage=<%=pm.lastPage+1%>">▶</a>
