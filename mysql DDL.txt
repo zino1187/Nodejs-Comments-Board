@@ -1,0 +1,8 @@
+create  table board(
+board_id  int primary key auto_increment
+, writer varchar(30)
+, title varchar(200)
+, content text
+, regdate timestamp default now()
+, hit int default 0
+) default character  set utf8;
