@@ -1,26 +1,17 @@
-create  table board(
-board_id  int primary key auto_increment
-, writer varchar(30)
-, title varchar(200)
-, content text
-, regdate timestamp default now()
-, hit int default 0
-) default character  set utf8;
-
 create table topcategory(
 topcategory_id int primary key auto_increment
-	,top_name varchar(20)
+,top_name varchar(20)
 ) default character  set utf8;
+
+create table subcategory(
+subcategory_id int primary key auto_increment
+,topcategory_id int
+,sub_name varchar(20)
+) default character  set utf8;
+
 
 insert into topcategory(top_name) values('상의');
 insert into topcategory(top_name) values('하의');
-
-
-create table subcategory(
-	subcategory_id int primary key auto_increment
-	,topcategory_id int
-	,sub_name varchar(20)
-) default character  set utf8;
 
 insert into subcategory(topcategory_id, sub_name) values(1,'가디건');
 insert into subcategory(topcategory_id, sub_name) values(1,'티셔츠');
@@ -28,6 +19,7 @@ insert into subcategory(topcategory_id, sub_name) values(1,'니트');
 insert into subcategory(topcategory_id, sub_name) values(2,'청바지');
 insert into subcategory(topcategory_id, sub_name) values(2,'츄리닝');
 insert into subcategory(topcategory_id, sub_name) values(2,'반바지');
+
 
 
 
