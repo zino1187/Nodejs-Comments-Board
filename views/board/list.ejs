@@ -3,10 +3,13 @@
     페이징 처리란? 여러건의 데이터를 분할 하는방법
     산수 로직에 의존한다!!
     */
-
-    var totalRecord=103;//총 레코드 수    
-
+    var currentPage=cPage; //현재 보고있는 페이지!!
+    var totalRecord=926;//총 레코드 수 
+    var pageSize=10; //한페이지당 보여질 레코드 수
+    var totalPage=Math.ceil(totalRecord/pageSize);//총 페이지 수
+    var blockSize=10;//블럭당 보여질 페이지 수!!
 %>
+<%="현재 페이지는 "+currentPage%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,7 +52,7 @@
             <th>등록일</th>
             <th>조회수</th>
         </tr>
-        <%for(var i=0;i<totalRecord;i++){%>
+        <%for(var i=0;i<pageSize;i++){%>
         <%//var obj=records[i];//배열에 들어있는 json 추출%>
         <tr>
             <td>26</td>
@@ -59,6 +62,15 @@
             <td><%//=obj.hit%></td>
         </tr>
         <%}%>
+        <tr>
+            <td colspan="5" align="center">
+                ◀
+                <%for(var i=1;i<=blockSize;i++){%>
+                <a href="/board/list?currentPage=<%=i%>">[<%=i%>]</a>
+                <%}%>
+                ▶
+            </td>
+        </tr>        
         <tr>
             <td colspan="5" align="right">
                 <button>글쓰기</button>

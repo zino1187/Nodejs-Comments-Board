@@ -34,6 +34,10 @@ var pool = mysql.createPool(conString);
 //요청처리!!
 //클라이언트가 요청한 uri 매핑!!
 app.get("/board/list", function (request, response) {
+    //클라이언트가 get 방식으로 전송한 파라미터들을
+    //추출해보자!!!
+    console.log(request.query);//json
+
     //mysql 테이블에 있는 레코드 모두 가져오기!!
     pool.getConnection(function (error, con) {
         if (error) {
@@ -56,12 +60,11 @@ app.get("/board/list", function (request, response) {
                 if (err) {
                     console.log(err);
                 } else {
-                    console.log(result);
+                    //console.log(result);
                     //결과를 ejs에서 사용할수 있도록 인수로 전달
                     response.render("board/list", {
                         records:result,
-                        name:"사과",
-                        price:200
+                        cPage:request.query.currentPage
                     });
                 }
             });
