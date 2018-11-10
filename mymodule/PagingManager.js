@@ -8,6 +8,8 @@ class PagingManager{
         this.blockSize=10;//블럭당 보여질 페이지 수
         this.firstPage=0;
         this.lastPage=0;
+        this.curPos=0;//페이지당 배열의 시작 index
+        this.num=0;//페이지당 시작 번호!!
     }
     //위에 선언한 클래스 멤버 변수들의 계산을 처리...
     init(request, total){
@@ -20,6 +22,8 @@ class PagingManager{
         this.totalPage = Math.ceil(this.totalRecord/this.pageSize);
         this.firstPage=this.currentPage-(this.currentPage-1)%this.blockSize;
         this.lastPage=this.firstPage+(this.blockSize-1);
+        this.curPos=(this.currentPage-1)*this.pageSize;
+        this.num=this.totalRecord - this.curPos;
     }
 }
 //위의 코드를 사용자 정의 모듈로 선언한다!!
